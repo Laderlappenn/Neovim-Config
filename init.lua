@@ -38,6 +38,8 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
 
+
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -47,6 +49,7 @@ vim.g.maplocalleader = ' '
 -- map leader to <Space>
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
+
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -73,6 +76,11 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  
+  -- Flexoki color scheme for Neovim
+  { 'kepano/flexoki-neovim', name = 'flexoki' },
+  
+  
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -202,6 +210,8 @@ require('lazy').setup({
     end,
   },
 
+
+
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -222,8 +232,20 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+	--enabled = false,
+	indent = {
+			char = "|",
+	         },
+	whitespace = {
+		     },
+  	scope = {
+		-- Disables underline of outer scope
+   		enabled = false,
+ 		}
+	    },
   },
+
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -277,6 +299,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -313,6 +336,12 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Set flexoki theme
+vim.cmd('colorscheme flexoki-dark')
+
+-- Disable tilda
+vim.opt.fillchars = {eob = " "}
 
 -- [[ Basic Keymaps ]]
 
@@ -670,3 +699,6 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+
